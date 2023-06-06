@@ -46,43 +46,84 @@ This type of counter is normally referred to as a Down Counter, (CTD). In a bina
 
 4-bit Count Down Counter
 ### Procedure
-/* write all the steps invloved */
+```
+1.Create a new project in QuartusII software.
+2.Name the project as uc for upcounter and dc for down counter.
+3.Create a new verilog hdl file in the project file.
+4.Name the module as dc and uc for down counter and up counter.
+5.Within the module declare input and output variables.
+6.Create a loop using if-else with condition parameter as reset value.
+7.End the loop.
+8.End the module.
+```
 
 
 
 ### PROGRAM 
-/*
+```
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
-*/
-
-
-
-
-
+Developed by: SRIJITH R
+RegisterNumber: 212221240054
+```
+#### UP COUNTER:
+```
+module sync(clk,A);
+input clk;
+output reg [0:2]A;
+always@(posedge clk)
+begin
+   A[0]=(((A[1])&(A[2]))^A[0]);
+	A[1]=(A[2])^A[1];
+	A[2]=1^A[2];
+end
+endmodule
+```
+#### DOWN COUNTER:
+```
+module down(input clk,input reset,output[0:3]counter);
+reg[0:3] counter_down;
+always@(posedge clk or posedge reset)
+begin
+if(reset)
+counter_down<=4'd0;
+else
+counter_down<=counter_down-4'd1;
+end
+assign counter=counter_down;
+endmodule
+```
 
 ### RTL LOGIC UP COUNTER AND DOWN COUNTER  
+#### UP COUNTER:
+![IO1](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/cc9b96d8-ab13-49e2-84e6-749753424772)
 
+#### DOWN COUNTER:
 
-
-
-
-
-
+![IO2](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/0ee73832-162f-4c90-99b8-11a602c350b2)
 
 
 ### TIMING DIGRAMS FOR COUNTER  
+#### UP COUNTER:
+![IO3](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/5f23a49e-128f-42b4-931e-2d66460cbcff)
 
 
+#### DOWN COUNTER:
+
+![IO4](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/45c06692-9b3a-45cd-9cdd-c55a624acdc5)
 
 
 
 ### TRUTH TABLE 
 
+#### UP COUNTER:
+
+![IO5](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/298e7d52-734a-423b-accd-f5721916b3e3)
+
+#### DOWN COUNTER:
+![IO6](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/751e50ec-1107-4c0e-a8f9-5150ba8accd4)
 
 
 
 
 
-### RESULTS 
+### RESULTS:
