@@ -1,13 +1,13 @@
 # Exp-6-Synchornous-counters - up counter and down counter 
-### AIM: 
-To implement 4 bit up and down counters and validate  functionality.
-### HARDWARE REQUIRED:  – 
-PC, Cyclone II , USB flasher
-### SOFTWARE REQUIRED:   
-Quartus prime
-### THEORY 
+## AIM:
+#### To implement 4 bit up and down counters and validate  functionality.
+## HARDWARE REQUIRED: 
+####  PC, Cyclone II , USB flasher
+### SOFTWARE REQUIRED:  
+#### Quartus prime
+## THEORY 
 
-#### UP COUNTER 
+### UP COUNTER 
 The counter is a digital sequential circuit and here it is a 4 bit counter, which simply means it can count from 0 to 15 and vice versa based upon the direction of counting (up/down). 
 
 The counter (“count“) value will be evaluated at every positive (rising) edge of the clock (“clk“) cycle.
@@ -39,7 +39,7 @@ Four-bit “Up” Counter
 
 
 
-#### DOWN COUNTER 
+### DOWN COUNTER 
 
 As well as counting “up” from zero and increasing or incrementing to some preset value, it is sometimes necessary to count “down” from a predetermined value to zero allowing us to produce an output that activates when the zero count or some other pre-set value is reached.
 
@@ -48,17 +48,15 @@ This type of counter is normally referred to as a Down Counter, (CTD). In a bina
 
 
 4-bit Count Down Counter
-### Procedure
-```
-1.Create a new project in QuartusII software.
-2.Name the project as uc for upcounter and dc for down counter.
-3.Create a new verilog hdl file in the project file.
-4.Name the module as dc and uc for down counter and up counter.
-5.Within the module declare input and output variables.
-6.Create a loop using if-else with condition parameter as reset value.
-7.End the loop.
-8.End the module.
-```
+###  PROCEDURE
+#### 1.Create a new project in QuartusII software. 
+#### 2.Name the project as uc for upcounter and dc for down counter. 
+#### 3.Create a new verilog hdl file in the project file. 
+#### 4.Name the module as dc and uc for down counter and up counter.
+#### 5.Within the module declare input and output variables.
+#### 6.Create a loop using if-else with condition parameter as reset value. 
+#### 7.End the loop.
+#### 8.End the module.
 
 
 
@@ -68,66 +66,71 @@ Program for flipflops  and verify its truth table in quartus using Verilog progr
 Developed by: SRIJITH R
 RegisterNumber: 212221240054
 ```
-#### UP COUNTER:
-```
-module sync(clk,A);
+#### UP COUNTER 
+```verilog
+module upcounter(clk,a);
 input clk;
-output reg [0:2]A;
+output reg[3:0]a;
 always@(posedge clk)
 begin
-   A[0]=(((A[1])&(A[2]))^A[0]);
-	A[1]=(A[2])^A[1];
-	A[2]=1^A[2];
+a[3]=(a[2] & a[1] & a[0]) ^ a[3];
+a[2]=(a[1] & a[0]) ^ a[2];
+a[1]=(a[0] ^ a[1]);
+a[0]=1 ^ a[0];
 end
 endmodule
 ```
-#### DOWN COUNTER:
-```
-module down(input clk,input reset,output[0:3]counter);
-reg[0:3] counter_down;
-always@(posedge clk or posedge reset)
+#### DOWN COUNTER 
+```verilog
+module downcounter(clk,a);
+input clk;
+output reg[3:0]a;
+always@(posedge clk)
 begin
-if(reset)
-counter_down<=4'd0;
-else
-counter_down<=counter_down-4'd1;
+a[3]=(~a[2] & ~a[1] & ~a[0])^ a[3];
+a[2]=(~a[1] & ~a[0]) ^ a[2];
+a[1]=(~a[0] ^ a[1]);
+a[0]=1 ^ a[0];
 end
-assign counter=counter_down;
 endmodule
 ```
 
-### RTL LOGIC UP COUNTER AND DOWN COUNTER  
-#### UP COUNTER:
-![IO1](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/cc9b96d8-ab13-49e2-84e6-749753424772)
+### RTL LOGIC
 
-#### DOWN COUNTER:
+#### UP COUNTER 
+![uprtl](https://github.com/nevil-ferdin/Exp-7-Synchornous-counters-/assets/115524975/10c72f0c-8af3-4070-8670-5032fdab64d2)
 
-![IO2](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/0ee73832-162f-4c90-99b8-11a602c350b2)
+#### DOWN COUNTER 
 
-
-### TIMING DIGRAMS FOR COUNTER  
-#### UP COUNTER:
-![IO3](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/5f23a49e-128f-42b4-931e-2d66460cbcff)
+![dcrtl](https://github.com/nevil-ferdin/Exp-7-Synchornous-counters-/assets/115524975/d86bebea-b116-4d96-85e2-3ba8cd082e42)
 
 
-#### DOWN COUNTER:
 
-![IO4](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/45c06692-9b3a-45cd-9cdd-c55a624acdc5)
+### TIMING DIGRAMS
+
+#### UP COUNTER 
+![uptd](https://github.com/nevil-ferdin/Exp-7-Synchornous-counters-/assets/115524975/a7e882cc-c146-4e5f-abf2-f35feb4ebeee)
+
+
+#### DOWN COUNTER 
+
+![dctd](https://github.com/nevil-ferdin/Exp-7-Synchornous-counters-/assets/115524975/e86c3d7e-3bd5-408c-b1dd-3e9268a5c9f8)
+
 
 
 
 ### TRUTH TABLE 
 
-#### UP COUNTER:
-
-![IO5](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/298e7d52-734a-423b-accd-f5721916b3e3)
-
-#### DOWN COUNTER:
-![IO6](https://github.com/Vineesh-AI-DS/Exp-7-Synchornous-counters-/assets/93427254/751e50ec-1107-4c0e-a8f9-5150ba8accd4)
+#### UP COUNTER 
+![up](https://github.com/nevil-ferdin/Exp-7-Synchornous-counters-/assets/115524975/d8009088-8189-4cc6-a832-8f2074241fb3)
 
 
+#### DOWN COUNTER
+![down](https://github.com/nevil-ferdin/Exp-7-Synchornous-counters-/assets/115524975/cdd6a394-3be7-411a-8ff2-48a9cbdd9ecc)
 
 
 
-### RESULTS:
-Thus Synchornous counters up counter and down counter circuit are studied and the truth table for different logic gates are verified.
+
+
+### RESULTS 
+##### Thus Synchornous counters up counter and down counter circuit are studied and the truth table for different logic gates are verified.
